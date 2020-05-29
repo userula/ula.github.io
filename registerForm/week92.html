@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="week92.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
+	<style>
+        *{
+			box-sizing: border-box;
+            margin:0 ;
+            padding:0;
+		}
+        header{
+            padding: 30px 0;
+            
+        }
+
+        .version1{
+            background-color: rgba(0,0,0,0.05); 
+
+        }
+        
+    	.gridform{
+            width: 100%;
+    		display: grid;
+    		grid-template-columns: [labels] 20% [inputs] 1fr;
+    		grid-auto-flow:row;
+    		background-color: silver;
+	        border:1px solid aqua;
+	        border-radius: 8px;
+	        padding: 10px 12px;
+
+    	}
+
+		.gridform > *{
+    		margin-top:15px;
+
+    	}
+
+    	.gridform>label{
+    		grid-column:labels;
+    		grid-row:auto;
+    		
+
+
+    	}
+
+    	.gridform>fieldset{
+	        grid-column: labels;
+	        text-align: center;
+	        grid-row: auto;
+	        grid-column: 1/3;
+	        border-radius: 10px;
+	        border:2px solid white;
+	       
+    	}
+    	
+    	.gridform>input[type='text'],
+		.gridform>input[type='email'],
+        .gridform>input[type='password'],
+        .gridform>.select{
+	        grid-column:inputs;
+	        grid-row: auto;
+	        padding-left: 7px;
+	        border:1px solid lightgrey;
+	        border-radius: 10px;
+      
+        }
+
+
+        .gridform>input[type='submit']{
+	        
+	        border:1px solid silver;
+	        border-radius: 8px;
+	        opacity: 0.6;
+	        font-size: 18px;
+	        padding: 10px 0;
+	        color: white;
+	        cursor: pointer;
+	        grid-column: 1/3;
+	     
+
+
+    	}
+
+	    .gridform>input[type='submit']:hover{
+	        opacity: 0.9;
+	        transition: 1.2s;
+	    }
+
+	    fieldset>div{
+    		display: flex;
+    		justify-content: space-around;
+    		padding: 5px 0;
+    	
+    	}
+		fieldset>div label {
+			width: 25%;
+		
+		}
+
+    	fieldset>div label input{
+    		margin-right: 5px; 
+        }
+        .version1>img{
+            width:100%;
+        }
+
+    	@media(max-width: 700px)
+    	{
+    		.gridform{
+				display: flex;
+				flex-direction: column;
+
+			}
+
+			fieldset>div{
+				flex-flow: row wrap;
+				justify-content: space-around;
+			}
+
+			fieldset>div label{
+				margin-bottom: 5px;
+				width: 100px;
+				text-align: left;
+			}
+
+
+    	}
+
+
+    .gridform,legend{
+        -webkit-transition:0.6s;
+        -moz-transition:0.6s;
+        -o-transition:0.6s;
+        transition:0.6s;
+    }
+
+    #ITgroup1,#ITgroup{
+        display: none;
+    }
+    </style>
+    
+
+
+</head>
+<body>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <header class="container-fluid bg-dark border border-dark text-white">
+                    <form class='container-fluid'>
+
+                    <label for="darktheme"><input type="radio" 
+                        id="darktheme"  name="theme" 
+                        onclick="changetheme(this.id)" checked> Dark Theme</label>
+                    <label for="lighttheme"><input type="radio" 
+                        id="lighttheme" name="theme" 
+                        onclick="changetheme(this.id)"> Light Theme</label>
+                     </form>
+             
+            </header>
+        </div>
+        <div class="row">
+            <div class="container-fluid py-3">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+              
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 py-3 version1">
+                            <img src="http://moodle.astanait.edu.kz/pluginfile.php/1/core_admin/logo/0x200/1579767611/Astana%20IT%20University%20%284%29.png"
+                             alt="moodle.astanait.edu.kz" title="moodle.astanait.edu.kz">
+
+                        </div>
+                    
+                        <div class="col-12 p-0">
+                            <form class="gridform" action="http://astanait.edu.kz/" method="POST" onsubmit="return send()">
+                                <label for="fname">First Name</label>
+                                <input type="text" id="fname" name="fname">
+                                <label for="repeatfname">Repeat Name</label>
+                                <input type="text" id="repeatfname" name="fname">
+
+                                <label for="lname">Last Name</label>
+                                <input type="text" id="lname" name="lname">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email">
+                                <label for="password">Password</label>
+                                <div class="select" style="border:0px;">
+                                <input type="password" id="Password" name="password" style="width:80%;">
+                                <button id="btnPassword" onmousedown="takevalue()">Show</button></div>
+                                <label>Choose Birth Date</label>
+                                <div class="select container-fluid pl-0 pb-0">
+                                    <select id="day"></select>
+                                    <select id="month"></select>
+                                    <select id="year" ></select>
+                                   
+                                </div>
+                        
+                                <fieldset>
+                                    <legend class='text-primary'>Choose your degree:</legend>
+                                    <div class="fieldset_labels"> 
+                                        <label><input type="radio" onclick='chooseITgroup(this.id)' id="bsdegree" name="degree" value="bsc">Bachelor</label>
+                                        <label><input type="radio" onclick='chooseITgroup(this.id)' id="degree" name="degree" value="msc">Master</label>
+                                        <label><input type="radio" onclick='chooseITgroup(this.id)' id="degree" name="degree" value="phd">PhD</label>
+                                        <label><input type="radio" onclick='chooseITgroup(this.id)' id="otherdegree"name="degree" value="other" checked>Other</label>
+                                    </div>
+                             
+                                </fieldset>
+                                <input type="text" id="other" name="other" onclick='chooseITgroup(this.id)' placeholder="Write your choice">
+
+
+
+                                <label id="ITgroup1">Choose Group</label>
+                                <div class="select container-fluid pl-0 pb-0" id="ITgroup">
+                                    <select name="ITgroup">
+                                        <option value="IT">IT</option>
+                                        <option value="ITM">IT-Management</option>
+                                        <option value="CS">Cyber Security</option>
+                                        <option value="TS">TS</option>
+                                    </select>
+                                </div>
+  
+                                <input type="submit" name="Submit" class='bg-primary font-weight-bold' id="submit1">
+                            </form>  
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <footer class="py-3"></footer>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <footer class="container-fluid bg-dark text-white text-center py-3">
+                <p>Copyright  &copy, ICT-2020</p>
+            </footer>
+        </div>
+    </div>
+
+
+    
+  
+            
+                
+
+    <script src="week921.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+
+ 
+
+</body>
+</html>
+
+
+
